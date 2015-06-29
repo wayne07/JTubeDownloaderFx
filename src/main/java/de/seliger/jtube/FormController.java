@@ -43,13 +43,18 @@ public class FormController implements Initializable {
 
     @FXML
     private void doDownload(MouseEvent event) {
-        LOGGER.debug("starting Download ...");
-        disableDownloadButton(true);
-        try {
-            processExecutor.downloadFrom(urlToSave.getText(), workdir);
-        } finally {
-            disableDownloadButton(false);
-            LOGGER.debug("end Download.");
+        int clickCount = event.getClickCount();
+        if (clickCount == 1) {
+            LOGGER.debug(String.format("clickcount = %d, starting Download ...", clickCount));
+            disableDownloadButton(true);
+            try {
+                processExecutor.downloadFrom(urlToSave.getText(), workdir);
+            } finally {
+                disableDownloadButton(false);
+                LOGGER.debug("end Download.");
+            }
+        } else {
+            LOGGER.debug(String.format("clickcount = %d, ignoring ...", clickCount));
         }
     }
 
