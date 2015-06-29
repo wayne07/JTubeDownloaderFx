@@ -53,8 +53,8 @@ public class FormController implements Initializable {
         btnDownload.setVisible(false);
         try {
             File tempFile = createTempFileName();
-            doDownloadToTempFile(tempFile, urlToSave.getText());
-            extractAudioFrom(tempFile, filename.getText(), targetDirectory.getText());
+//            doDownloadToTempFile(tempFile, urlToSave.getText());
+//            extractAudioFrom(tempFile, filename.getText(), targetDirectory.getText());
             if (deleteVideo.isSelected()) {
                 deleteTempFile(tempFile);
             }
