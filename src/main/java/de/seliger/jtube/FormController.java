@@ -8,7 +8,6 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
-import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -45,22 +44,18 @@ public class FormController implements Initializable {
     @FXML
     private void doDownload(MouseEvent event) {
         LOGGER.debug("starting Download ...");
-        btnDownload.setDisable(true);
-        btnDownload.setVisible(false);
+        disableDownloadButton(true);
         try {
             processExecutor.downloadFrom(urlToSave.getText(), workdir);
-
-//            File tempFile = createTempFileName();
-//            doDownloadToTempFile(tempFile, urlToSave.getText());
-//            extractAudioFrom(tempFile, filename.getText(), targetDirectory.getText());
-//            if (deleteVideo.isSelected()) {
-//                deleteTempFile(tempFile);
-//            }
         } finally {
-            btnDownload.setDisable(false);
-            btnDownload.setVisible(true);
+            disableDownloadButton(false);
             LOGGER.debug("end Download.");
         }
+    }
+
+    private void disableDownloadButton(boolean disable) {
+        btnDownload.setDisable(disable);
+        btnDownload.setVisible(!disable);
     }
 
     @Override
@@ -81,18 +76,6 @@ public class FormController implements Initializable {
         File target = new File(path);
         target.mkdirs();
         return target.getAbsolutePath();
-    }
-
-    private void deleteTempFile(File tempFile) {
-        tempFile.delete();
-    }
-
-    private File createTempFileName() {
-        String systemTempPath = System.getProperty("java.io.tmpdir");
-        String randomTimeString = MILLIS_FORMATTER.print(new DateTime());
-        String name = systemTempPath + separator + "youtube" + separator + "youtube-dl-" + randomTimeString + ".flv";
-        LOGGER.info("Temp-File-Name: " + name);
-        return new File(name);
     }
 
 }
