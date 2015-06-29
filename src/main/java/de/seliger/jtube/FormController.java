@@ -27,17 +27,13 @@ public class FormController implements Initializable {
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormat.forPattern("yyyyMMdd").withLocale(Locale.GERMAN);
 
     @FXML
-    private CheckBox deleteVideo;
-    @FXML
     private TextField targetDirectory;
     @FXML
     private TextField urlToSave;
     @FXML
-    private TextField filename;
+    private CheckBox includeVideo;
     @FXML
     private Button btnDownload;
-
-    private String workdir;
 
     private ProcessExecutor processExecutor = new ProcessExecutor();
 
@@ -48,7 +44,7 @@ public class FormController implements Initializable {
             LOGGER.debug(String.format("clickcount = %d, starting Download ...", clickCount));
             disableDownloadButton(true);
             try {
-                processExecutor.downloadFrom(urlToSave.getText(), workdir);
+                processExecutor.downloadFrom(urlToSave.getText(), targetDirectory.getText());
             } finally {
                 disableDownloadButton(false);
                 LOGGER.debug("end Download.");
@@ -65,10 +61,8 @@ public class FormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.workdir = createTargetDirectory(getUserHome());
-
-        targetDirectory.setText(workdir);
-        deleteVideo.setSelected(true);
+        targetDirectory.setText(createTargetDirectory(getUserHome()));
+        includeVideo.setSelected(false);
     }
 
     private String getUserHome() {
