@@ -44,7 +44,7 @@ public class FormController implements Initializable {
             LOGGER.debug(String.format("clickcount = %d, starting Download ...", clickCount));
             disableDownloadButton(true);
             try {
-                processExecutor.downloadFrom(urlToSave.getText(), targetDirectory.getText());
+                processExecutor.downloadFrom(urlToSave.getText(), targetDirectory.getText(), includeVideo.isSelected());
             } finally {
                 disableDownloadButton(false);
                 LOGGER.debug("end Download.");
