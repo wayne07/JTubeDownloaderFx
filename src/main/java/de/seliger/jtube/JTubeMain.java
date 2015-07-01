@@ -18,7 +18,7 @@ public class JTubeMain extends Application {
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(JTubeMain.class.getResource("jtube.fxml"));
         primaryStage.setTitle("JTubeDownloader");
-        primaryStage.setScene(new Scene(root, 800, 400));
+        primaryStage.setScene(new Scene(root, 800, 550));
         primaryStage.show();
     }
 }
