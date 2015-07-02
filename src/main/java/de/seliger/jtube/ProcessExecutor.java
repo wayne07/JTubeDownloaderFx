@@ -36,31 +36,57 @@ public class ProcessExecutor {
         outputChangedListeners.add(listener);
     }
 
-    private void executeProcess(String[] cmdarray) throws IOException, InterruptedException {
+    private void executeProcess(final String[] cmdarray) throws IOException, InterruptedException {
         String commandAsString = Joiner.on(" ").join(cmdarray);
         LOGGER.info("executing command: " + commandAsString);
-        Process process = Runtime.getRuntime().exec(cmdarray);
 
-        BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String line;
-        while ((line = input.readLine()) != null) {
-            informListener(line);
-            LOGGER.info(line);
+        new Thread(new BackgroundProcess(cmdarray, this)).start();
+    }
+
+    public static class BackgroundProcess implements Runnable {
+
+        private final String[] cmdarray;
+        private final ProcessExecutor processExecutor;
+
+        public BackgroundProcess(String[] cmdarray, ProcessExecutor processExecutor) {
+            this.cmdarray = cmdarray;
+            this.processExecutor = processExecutor;
         }
 
-        BufferedReader inputError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-        String lineError;
-        while ((lineError = inputError.readLine()) != null) {
-            informListener(lineError);
-            LOGGER.warn(lineError);
+        @Override
+        public void run() {
+            try {
+                runProcess();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
-        int exitVal = process.waitFor();
-        LOGGER.info("Exited with error code " + exitVal);
-        if (exitVal > 0) {
-            String message = "Der Aufruf des Prozesses '%s' ist fehlgeschlagen. Bitte Papa rufen ;-) ";
-            JOptionPane.showMessageDialog(null, String.format(message, cmdarray[0]));
+        public void runProcess() throws IOException, InterruptedException {
+            Process process = Runtime.getRuntime().exec(cmdarray);
+
+            BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+            while ((line = input.readLine()) != null) {
+                processExecutor.informListener(line);
+                LOGGER.info(line);
+            }
+
+            BufferedReader inputError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+            String lineError;
+            while ((lineError = inputError.readLine()) != null) {
+                processExecutor.informListener(lineError);
+                LOGGER.warn(lineError);
+            }
+
+            int exitVal = process.waitFor();
+            LOGGER.info("Exited with error code " + exitVal);
+            if (exitVal > 0) {
+                String message = "Der Aufruf des Prozesses '%s' ist fehlgeschlagen. Bitte Papa rufen ;-) ";
+                JOptionPane.showMessageDialog(null, String.format(message, cmdarray[0]));
+            }
         }
+
     }
 
     private void informListener(String line) {
