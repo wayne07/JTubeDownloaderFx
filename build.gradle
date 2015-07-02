@@ -3,7 +3,7 @@ apply from: 'http://dl.bintray.com/content/shemnon/javafx-gradle/8.1.1/javafx.pl
 
 sourceCompatibility = 1.7
 group 'de.seliger'
-version '1.1'
+version '1.2'
 
 javafx {
     mainClass 'de.seliger.jtube.JTubeMain'
