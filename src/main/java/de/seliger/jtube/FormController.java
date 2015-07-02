@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.TextFlow;
 
 public class FormController implements Initializable {
 
@@ -34,6 +35,8 @@ public class FormController implements Initializable {
     private CheckBox includeVideo;
     @FXML
     private Button btnDownload;
+    @FXML
+    private TextFlow downloadStatus;
 
     private ProcessExecutor processExecutor = new ProcessExecutor();
 
