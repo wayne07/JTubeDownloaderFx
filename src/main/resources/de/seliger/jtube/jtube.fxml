@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
@@ -11,8 +16,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.TextFlow?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.seliger.jtube.FormController">
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.seliger.jtube.FormController">
     <children>
         <TabPane tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -20,37 +25,32 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0">
                             <children>
-                                <TitledPane collapsible="false" layoutX="14.0" layoutY="14.0" prefHeight="193.0" prefWidth="775.0"
-                                            text="Auswahl">
+                                <TitledPane collapsible="false" layoutX="14.0" layoutY="14.0" prefHeight="193.0" prefWidth="775.0" text="Auswahl">
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                             <children>
-                                                <Label layoutX="24.0" layoutY="20.0" text="Zielverzeichnis für Dateien:"/>
-                                                <Label layoutX="24.0" layoutY="54.0" text="zu speichernde URL:"/>
-                                                <TextField fx:id="targetDirectory" layoutX="215.0" layoutY="15.0" prefWidth="500.0"/>
-                                                <TextField fx:id="urlToSave" layoutX="215.0" layoutY="49.0" prefWidth="500.0"
-                                                           promptText="bitte die Internet-Adresse eingeben"/>
-                                                <CheckBox fx:id="includeVideo" layoutX="215.0" layoutY="86.0" mnemonicParsing="false"
-                                                          text="Video-Datei speichern"/>
-                                                <Button fx:id="btnDownload" layoutX="215.0" layoutY="124.0" mnemonicParsing="false"
-                                                        onMouseClicked="#doDownload" text="Download starten"/>
+                                                <Label layoutX="24.0" layoutY="20.0" text="Zielverzeichnis für Dateien:" />
+                                                <Label layoutX="24.0" layoutY="54.0" text="zu speichernde URL:" />
+                                                <TextField fx:id="targetDirectory" layoutX="215.0" layoutY="15.0" prefWidth="500.0" />
+                                                <TextField fx:id="urlToSave" layoutX="215.0" layoutY="49.0" prefWidth="500.0" promptText="bitte die Internet-Adresse eingeben" />
+                                                <CheckBox fx:id="includeVideo" layoutX="215.0" layoutY="86.0" mnemonicParsing="false" text="Video-Datei speichern" />
+                                                <Button fx:id="btnDownload" layoutX="215.0" layoutY="124.0" mnemonicParsing="false" onMouseClicked="#doDownload" text="Download starten" />
                                             </children>
                                         </AnchorPane>
                                     </content>
                                 </TitledPane>
-                                <TitledPane animated="false" layoutX="13.0" layoutY="218.0" prefHeight="283.0" prefWidth="775.0"
-                                            text="Download-Status">
+                                <TitledPane animated="false" layoutX="13.0" layoutY="218.0" prefHeight="283.0" prefWidth="775.0" text="Download-Status">
                                     <content>
                                         <ScrollPane>
                                             <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
-                                                    <children>
-                                                        <TextFlow fx:id="downloadStatus" maxHeight="1.7976931348623157E308"
-                                                                  maxWidth="1.7976931348623157E308" minHeight="-Infinity"
-                                                                  minWidth="-Infinity" AnchorPane.bottomAnchor="3.0"
-                                                                  AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0"
-                                                                  AnchorPane.topAnchor="3.0"/>
-                                                    </children>
+                                                <AnchorPane>
+                                       <children>
+                                          <TextArea fx:id="downloadStatus" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <padding>
+                                                <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                                             </padding>
+                                          </TextArea>
+                                       </children>
                                                 </AnchorPane>
                                             </content>
                                         </ScrollPane>
@@ -62,7 +62,7 @@
                 </Tab>
                 <Tab text="Dateiliste">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                     </content>
                 </Tab>
             </tabs>

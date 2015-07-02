@@ -12,13 +12,14 @@ import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import de.seliger.jtube.notify.DownloadProgress;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.TextFlow;
 
 public class FormController implements Initializable {
 
@@ -36,7 +37,7 @@ public class FormController implements Initializable {
     @FXML
     private Button btnDownload;
     @FXML
-    private TextFlow downloadStatus;
+    private TextArea downloadStatus;
 
     private ProcessExecutor processExecutor = new ProcessExecutor();
 
@@ -66,6 +67,7 @@ public class FormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         targetDirectory.setText(createTargetDirectory(getUserHome()));
         includeVideo.setSelected(false);
+        processExecutor.addOuputChangedListener(new DownloadProgress(downloadStatus));
     }
 
     private String getUserHome() {
