@@ -12,13 +12,12 @@ public class DownloadProgress implements OutputChangedListener {
 
     @Override
     public void lineAdded(final String text) {
-//        javafx.application.Platform.runLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                downloadStatus.appendText(text + "\n");
-//            }
-//        });
-        downloadStatus.appendText(text + "\n");
+        javafx.application.Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                downloadStatus.appendText(text + "\n");
+            }
+        });
     }
 
 }

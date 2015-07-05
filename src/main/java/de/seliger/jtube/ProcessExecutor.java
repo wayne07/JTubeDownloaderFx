@@ -58,7 +58,7 @@ public class ProcessExecutor {
             try {
                 runProcess();
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error("Fehler beim Download", e);
             }
         }
 
