@@ -66,10 +66,10 @@ public class ProcessExecutor {
             Process process = Runtime.getRuntime().exec(cmdarray);
 
             BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            input.lines().forEach(line -> informListenersAndLog(line));
+            input.lines().forEach(this::informListenersAndLog);
 
             BufferedReader inputError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            inputError.lines().forEach(lineError -> informListenersAndLog(lineError));
+            inputError.lines().forEach(this::informListenersAndLog);
 
             int exitVal = process.waitFor();
             LOGGER.info("Exited with error code " + exitVal);
