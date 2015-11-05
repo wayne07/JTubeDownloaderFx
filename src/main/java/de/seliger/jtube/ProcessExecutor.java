@@ -90,9 +90,7 @@ public class ProcessExecutor {
     }
 
     private void informListener(String line) {
-        for (OutputChangedListener listener : outputChangedListeners) {
-            listener.lineAdded(line);
-        }
+        outputChangedListeners.stream().forEach(listener -> listener.lineAdded(line));
     }
 
 }
