@@ -66,18 +66,10 @@ public class ProcessExecutor {
             Process process = Runtime.getRuntime().exec(cmdarray);
 
             BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
-            while ((line = input.readLine()) != null) {
-                processExecutor.informListener(line);
-                LOGGER.info(line);
-            }
+            input.lines().forEach(line -> informListenersAndLog(line));
 
             BufferedReader inputError = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            String lineError;
-            while ((lineError = inputError.readLine()) != null) {
-                processExecutor.informListener(lineError);
-                LOGGER.warn(lineError);
-            }
+            inputError.lines().forEach(lineError -> informListenersAndLog(lineError));
 
             int exitVal = process.waitFor();
             LOGGER.info("Exited with error code " + exitVal);
@@ -87,10 +79,15 @@ public class ProcessExecutor {
             }
         }
 
+        private void informListenersAndLog(String lineError) {
+            processExecutor.informListener(lineError);
+            LOGGER.info(lineError);
+        }
+
     }
 
     private void informListener(String line) {
-        outputChangedListeners.stream().forEach(listener -> listener.lineAdded(line));
+        outputChangedListeners.forEach(listener -> listener.lineAdded(line));
     }
 
 }
