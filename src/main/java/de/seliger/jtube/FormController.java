@@ -7,6 +7,8 @@ import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import org.apache.log4j.Logger;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
@@ -82,6 +84,41 @@ public class FormController implements Initializable {
         return target.getAbsolutePath();
     }
 
+    @FXML
+    public void inputChanged(Event event) {
+        LOGGER.debug("inputChanged ..");
+    }
+
+    @FXML
+    public void dragExited(Event event) {
+        LOGGER.debug("dragExited ..");
+    }
+
+    @FXML
+    public void onAction(ActionEvent actionEvent) {
+        LOGGER.debug("onAction ..");
+    }
+
+    @FXML
+    public void dragDone(Event event) {
+        LOGGER.debug("dragDone ..");
+    }
+
+    @FXML
+    public void textChanged(Event event) {
+        LOGGER.debug("textChanged ..");
+    }
+
+    @FXML
+    public void keyTyped(Event event) {
+        LOGGER.debug("Download-Status zurücksetzen";
+        downloadStatus.setText("");
+    }
+
+    @FXML
+    public void dragReleased(Event event) {
+        LOGGER.debug("dragReleased ..");
+    }
 }
 
 /*
