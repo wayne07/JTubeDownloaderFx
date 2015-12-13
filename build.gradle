@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply from: 'http://dl.bintray.com/content/shemnon/javafx-gradle/8.1.1/javafx.plugin'
 
-sourceCompatibility = 1.7
+sourceCompatibility = 1.8
 group 'de.seliger'
 version '1.2'
 

@@ -111,7 +111,7 @@ public class FormController implements Initializable {
 
     @FXML
     public void keyTyped(Event event) {
-        LOGGER.debug("Download-Status zurücksetzen";
+        LOGGER.debug("Download-Status zurücksetzen");
         downloadStatus.setText("");
     }
 
