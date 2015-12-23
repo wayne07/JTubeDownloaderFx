@@ -4,15 +4,14 @@ import static java.io.File.separator;
 
 import java.io.File;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import org.apache.logging.log4j.Logger;
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import de.seliger.jtube.notify.DownloadProgress;
 import javafx.fxml.FXML;
@@ -27,8 +26,7 @@ public class FormController implements Initializable {
 
     private static final Logger LOGGER = org.apache.logging.log4j.LogManager.getLogger(FormController.class);
 
-    public static final DateTimeFormatter MILLIS_FORMATTER = DateTimeFormat.forPattern("yyyyMMddHHmmssSSS").withLocale(Locale.GERMAN);
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormat.forPattern("yyyyMMdd").withLocale(Locale.GERMAN);
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd").withLocale(Locale.GERMAN);
 
     @FXML
     private TextField targetDirectory;
@@ -77,7 +75,7 @@ public class FormController implements Initializable {
     }
 
     private String createTargetDirectory(String userHome) {
-        String dayString = DATE_FORMATTER.print(new LocalDate());
+        String dayString = LocalDate.now().format(DATE_FORMATTER);
         String path = userHome + separator + "Musik" + separator + dayString;
         File target = new File(path);
         target.mkdirs();
