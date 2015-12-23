@@ -7,15 +7,15 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import org.apache.log4j.Logger;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 
 import de.seliger.jtube.notify.OutputChangedListener;
+import org.apache.logging.log4j.Logger;
 
 public class ProcessExecutor {
 
-    private static final Logger LOGGER = Logger.getLogger(ProcessExecutor.class);
+    private static final Logger LOGGER = org.apache.logging.log4j.LogManager.getLogger(ProcessExecutor.class);
 
     private final CommandBuilder commandBuilder = new CommandBuilder();
     private final List<OutputChangedListener> outputChangedListeners = Lists.newArrayList();

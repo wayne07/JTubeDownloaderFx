@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -25,7 +25,7 @@ import javafx.scene.input.MouseEvent;
 
 public class FormController implements Initializable {
 
-    private static final Logger LOGGER = Logger.getLogger(FormController.class);
+    private static final Logger LOGGER = org.apache.logging.log4j.LogManager.getLogger(FormController.class);
 
     public static final DateTimeFormatter MILLIS_FORMATTER = DateTimeFormat.forPattern("yyyyMMddHHmmssSSS").withLocale(Locale.GERMAN);
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormat.forPattern("yyyyMMdd").withLocale(Locale.GERMAN);
