@@ -2,27 +2,35 @@ pipeline {
     /* insert Declarative Pipeline here */
     agent any
 
+    // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
+    def server = Artifactory.server "SERVER_ID"
+    // Create an Artifactory Gradle instance.
+    def rtGradle = Artifactory.newGradleBuild()
+
     stages {
-        stage('Preparation') { // for display purposes
+        stage('Clone sources') { // for display purposes
             steps {
                 // Get some code from a GitHub repository
                 git 'https://github.com/wayne07/JTubeDownloaderFx.git'
             }
         }
+        stage('Artifactory configuration') {
+            // Tool name from Jenkins configuration
+            rtGradle.tool = "gradle-4"
+            // Set Artifactory repositories for dependencies resolution and artifacts deployment.
+            rtGradle.deployer repo:'ext-release-local', server: server
+            rtGradle.resolver repo:'remote-repos', server: server
+        }
+
         stage('Build') {
             steps {
                 echo 'Building..'
-                withMaven(maven : 'M3') {
-                    sh 'mvn clean compile'
-                }
+                buildInfo = rtGradle.run rootDir: "gradle-examples/4/gradle-example-ci-server/", buildFile: 'build.gradle', tasks: 'clean compile'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                withMaven(maven : 'M3') {
-                    sh 'mvn clean test'
-                }
             }
         }
         stage('Deploy') {
