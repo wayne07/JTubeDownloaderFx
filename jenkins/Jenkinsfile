@@ -1,5 +1,5 @@
 #!groovy​
-# https://jenkins.io/doc/book/pipeline/
+//# https://jenkins.io/doc/book/pipeline/
 pipeline {
     /* insert Declarative Pipeline here */
     agent any
