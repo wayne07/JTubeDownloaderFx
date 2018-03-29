@@ -1,15 +1,13 @@
 pipeline {
     /* insert Declarative Pipeline here */
     agent any
-    def mvnHome
 
     stages {
         stage('Preparation') { // for display purposes
-            // Get some code from a GitHub repository
-            git 'https://github.com/wayne07/JTubeDownloaderFx.git'
-            // Get the Maven tool.
-            // ** NOTE: This 'M3' Maven tool must be configured in the global configuration.
-            mvnHome = tool 'M3'
+            steps {
+                // Get some code from a GitHub repository
+                git 'https://github.com/wayne07/JTubeDownloaderFx.git'
+            }
         }
         stage('Build') {
             steps {
