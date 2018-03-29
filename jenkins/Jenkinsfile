@@ -5,10 +5,6 @@ pipeline {
     agent any
 
     environment {
-        // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
-        def server = Artifactory.server "SERVER_ID"
-        // Create an Artifactory Gradle instance.
-        def rtGradle = Artifactory.newGradleBuild()
     }
 
     stages {
@@ -20,6 +16,10 @@ pipeline {
         }
         stage('Artifactory configuration') {
             steps {
+                // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
+                def server = Artifactory.server "SERVER_ID"
+                // Create an Artifactory Gradle instance.
+                def rtGradle = Artifactory.newGradleBuild()
                 // Tool name from Jenkins configuration
                 rtGradle.tool = "gradle-4"
                 // Set Artifactory repositories for dependencies resolution and artifacts deployment.
