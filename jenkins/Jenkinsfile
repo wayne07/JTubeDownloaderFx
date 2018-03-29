@@ -1,11 +1,15 @@
+#!groovy​
+# https://jenkins.io/doc/book/pipeline/
 pipeline {
     /* insert Declarative Pipeline here */
     agent any
 
-    // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
-    def server = Artifactory.server "SERVER_ID"
-    // Create an Artifactory Gradle instance.
-    def rtGradle = Artifactory.newGradleBuild()
+    environment {
+        // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
+        def server = Artifactory.server "SERVER_ID"
+        // Create an Artifactory Gradle instance.
+        def rtGradle = Artifactory.newGradleBuild()
+    }
 
     stages {
         stage('Clone sources') { // for display purposes
