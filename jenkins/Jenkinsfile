@@ -14,24 +14,11 @@ pipeline {
                 git 'https://github.com/wayne07/JTubeDownloaderFx.git'
             }
         }
-        stage('Artifactory configuration') {
-            steps {
-                // Get Artifactory server instance, defined in the Artifactory Plugin administration page.
-                def server = Artifactory.server "SERVER_ID"
-                // Create an Artifactory Gradle instance.
-                def rtGradle = Artifactory.newGradleBuild()
-                // Tool name from Jenkins configuration
-                rtGradle.tool = "gradle-4"
-                // Set Artifactory repositories for dependencies resolution and artifacts deployment.
-                rtGradle.deployer repo:'ext-release-local', server: server
-                rtGradle.resolver repo:'remote-repos', server: server
-            }
-        }
-
         stage('Build') {
             steps {
                 echo 'Building..'
-                buildInfo = rtGradle.run rootDir: "gradle-examples/4/gradle-example-ci-server/", buildFile: 'build.gradle', tasks: 'clean compile'
+                sh 'gradle build --info'
+//                buildInfo = rtGradle.run rootDir: "gradle-examples/4/gradle-example-ci-server/", buildFile: 'build.gradle', tasks: 'clean compile'
             }
         }
         stage('Test') {
