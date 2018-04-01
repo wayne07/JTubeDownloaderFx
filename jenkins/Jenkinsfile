@@ -5,7 +5,6 @@ pipeline {
     agent any
 
     environment {
-        def gradleHome = ""
         def JFXRT_HOME = "/opt/java/jdk1.8.0_162"
     }
 
@@ -25,10 +24,8 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh 'env'
-                sh 'java -version'
                 sh '$JAVA_HOME/bin/java -version'
-                    // some block
-                    sh './jtube/gradlew build'
+                sh './jtube/gradlew build'
             }
         }
         stage('Test') {
