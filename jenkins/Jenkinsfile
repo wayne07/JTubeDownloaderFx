@@ -25,6 +25,10 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh 'env'
+                sh 'cd $JAVA_HOME'
+                sh 'pwd'
+                sh 'bin/java -version'
+                sh '$JAVA_HOME/bin/java -version'
 //#                withEnv(['JAVA_HOME="/opt/java/jdk1.8.0_162"']) {
                     // some block
                     sh './jtube/gradlew build'
