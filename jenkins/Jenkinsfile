@@ -13,7 +13,7 @@ pipeline {
             steps {
                 // Get the code from a GitHub repository
                 dir('jtube') {
-                    git branch: 'pipelineJenkins', changelog: true, credentialsId: 'githubCredentials', poll: true, url: 'https://github.com/wayne07/JTubeDownloaderFx.git'
+                    git branch: 'jenkinsPipeline', changelog: true, credentialsId: 'githubCredentials', poll: true, url: 'https://github.com/wayne07/JTubeDownloaderFx.git'
                 }
                 dir('jenkinsJobs') {
                     git branch: 'master', changelog: false, credentialsId: 'githubCredentials', poll: false, url: 'https://github.com/wayne07/jenkins-jobs.git'
