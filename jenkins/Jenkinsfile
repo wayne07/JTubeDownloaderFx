@@ -5,6 +5,7 @@ pipeline {
     agent any
 
     environment {
+        def gradleHome = ""
     }
 
     stages {
