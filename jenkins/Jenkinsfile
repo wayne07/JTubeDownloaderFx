@@ -6,19 +6,25 @@ pipeline {
 
     environment {
         def gradleHome = ""
+        def JAVA_HOME = "/usr/lib/jvm/java-1.8-openjdk"
     }
 
     stages {
         stage('Clone sources') { // for display purposes
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/wayne07/JTubeDownloaderFx.git'
+                dir('jtube') {
+                    git url: 'https://github.com/wayne07/JTubeDownloaderFx.git'
+                }
+                dir('jenkinsJobs') {
+                    git url: 'https://github.com/wayne07/jenkins-jobs.git'
+                }
             }
         }
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'gradle build --info'
+                sh './jtube/gradlew build'
 //                buildInfo = rtGradle.run rootDir: "gradle-examples/4/gradle-example-ci-server/", buildFile: 'build.gradle', tasks: 'clean compile'
             }
         }
