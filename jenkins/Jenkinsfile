@@ -24,7 +24,10 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh './jtube/gradlew build'
+                withEnv(['JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk"']) {
+                    // some block
+                    sh './jtube/gradlew build'
+                }
 //                buildInfo = rtGradle.run rootDir: "gradle-examples/4/gradle-example-ci-server/", buildFile: 'build.gradle', tasks: 'clean compile'
             }
         }
