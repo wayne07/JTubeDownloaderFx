@@ -9,14 +9,14 @@ pipeline {
     }
 
     stages {
-        stage('Clone sources') { // for display purposes
+        stage('Clone sources') {
             steps {
-                // Get some code from a GitHub repository
+                // Get the code from a GitHub repository
                 dir('jtube') {
-                    git url: 'https://github.com/wayne07/JTubeDownloaderFx.git'
+                    git branch: 'pipelineJenkins', changelog: true, credentialsId: 'githubCredentials', poll: true, url: 'https://github.com/wayne07/JTubeDownloaderFx.git'
                 }
                 dir('jenkinsJobs') {
-                    git url: 'https://github.com/wayne07/jenkins-jobs.git'
+                    git branch: 'master', changelog: false, credentialsId: 'githubCredentials', poll: false, url: 'https://github.com/wayne07/jenkins-jobs.git'
                 }
             }
         }
@@ -25,17 +25,19 @@ pipeline {
                 echo 'Building..'
                 sh 'env'
                 sh '$JAVA_HOME/bin/java -version'
-                sh './jtube/gradlew build'
+                sh './jtube/gradlew clean assemble'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
+                sh './jtube/gradlew test'
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                sh './jtube/gradlew jfxDeploy'
             }
         }
     }
