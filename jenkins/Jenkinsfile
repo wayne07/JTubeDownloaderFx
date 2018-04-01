@@ -6,7 +6,7 @@ pipeline {
 
     environment {
         def gradleHome = ""
-        def JAVA_HOME = "/usr/lib/jvm/java-1.8-openjdk"
+        def JAVA_HOME = "/opt/java/jdk1.8.0_162"
     }
 
     stages {
@@ -25,10 +25,10 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh 'env'
-                withEnv(['JAVA_HOME="/opt/java/jdk-9"']) {
+#                withEnv(['JAVA_HOME="/opt/java/jdk1.8.0_162"']) {
                     // some block
                     sh './jtube/gradlew build'
-                }
+#                }
 //                buildInfo = rtGradle.run rootDir: "gradle-examples/4/gradle-example-ci-server/", buildFile: 'build.gradle', tasks: 'clean compile'
             }
         }
