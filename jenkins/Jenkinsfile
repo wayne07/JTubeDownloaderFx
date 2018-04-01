@@ -6,7 +6,7 @@ pipeline {
 
     environment {
         def gradleHome = ""
-        def JAVA_HOME = "/opt/java/jdk1.8.0_172"
+//#        def JAVA_HOME = "/opt/java/jdk1.8.0_172"
     }
 
     stages {
