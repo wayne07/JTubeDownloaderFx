@@ -28,6 +28,19 @@ pipeline {
                 sh './jtube/gradlew clean assemble'
             }
         }
+        stage('Test with interaction') {
+            input {
+                message "Should we continue running Tests?"
+                ok "Yes, we should."
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
+            }
+            steps {
+                echo 'Hello, ${PERSON}, we continue running Tests..'
+                sh './jtube/gradlew test'
+            }
+        }
         stage('Test') {
             steps {
                 echo 'Testing..'
