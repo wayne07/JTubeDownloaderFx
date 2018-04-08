@@ -25,7 +25,7 @@ pipeline {
                 echo 'Building..'
                 sh 'env'
                 sh '$JAVA_HOME/bin/java -version'
-                sh './jtube/gradlew assemble'
+                sh './jtube/gradlew build'
             }
         }
         stage('Test') {
